@@ -4,14 +4,41 @@ package Model;
  * An Event in a person's life.
  */
 public class Event {
-    private String eventID;
+    /**
+     * Username of the user's account this event belongs to.
+     */
     private String associatedUsername;
+    /**
+     * event's unique ID.
+     */
+    private String eventID;
+    /**
+     * ID of the person this event belongs to.
+     */
     private String personID;
+    /**
+     * Latitude of the event's location.
+     */
     private float latitude;
+    /**
+     * Longitude of the event's location.
+     */
     private float longitude;
+    /**
+     * Name of country where event occurred.
+     */
     private String country;
+    /**
+     * Name of city where event occurred.
+     */
     private String city;
+    /**
+     * Type of event("birth," baptism," etc.)
+     */
     private String eventType;
+    /**
+     * Year of the event's occurrence.
+     */
     private int year;
 
     /**

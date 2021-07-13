@@ -4,15 +4,42 @@ package Model;
  * A Person.
  */
 public class Person {
-    private String personID;
+    /**
+     * Name of user account this person belongs to.
+     */
     private String associatedUsername;
+    /**
+     * Person's unique ID.
+     */
+    private String personID;
+    /**
+     * Person's first name.
+     */
     private String firstName;
+    /**
+     * Person's last name.
+     */
     private String lastName;
+    /**
+     * Person's gender. Either "m" or "f."
+     */
     private String gender;
+    /**
+     * ID of person's gather (Optional).
+     */
     private String fatherID;
+    /**
+     * ID of person's mother (Optional).
+     */
     private String motherID;
+    /**
+     * ID of person's spouse (Optional).
+     */
     private String spouseID;
-
+    /**
+     * Boolean identifier.
+     */
+    private Person[] people;
     /**
      * Creates a person profile.
      *
@@ -34,6 +61,14 @@ public class Person {
         this.fatherID = fatherID;
         this.motherID = motherID;
         this.spouseID = spouseID;
+    }
+
+    public Person[] getPeople() {
+        return people;
+    }
+
+    public void setPeople(Person[] people) {
+        this.people = people;
     }
 
     public String getPersonID() {

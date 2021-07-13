@@ -6,12 +6,33 @@ import java.util.Objects;
  * A User.
  */
 public class User {
+    /**
+     * Unique user's userName.
+     */
     private String userName;
+    /**
+     * User's password.
+     */
     private String password;
+    /**
+     * User's email.
+     */
     private String email;
+    /**
+     * User's first name.
+     */
     private String firstName;
+    /**
+     * User's last name.
+     */
     private String lastName;
+    /**
+     * User's gender.
+     */
     private String gender;
+    /**
+     * User's unique person ID of the generated Person object.
+     */
     private String personID;
 
     /**
