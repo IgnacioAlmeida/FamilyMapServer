@@ -2,14 +2,33 @@ package DataAccess;
 
 import Model.User;
 
-public class UserDAO {
+import javax.xml.crypto.Data;
+import java.sql.*;
 
+public class UserDAO {
+    private final Connection conn;
+
+    public UserDAO(Connection conn){this.conn = conn;}
     /**
      * Inserts a new user to data
      * @param user
      */
-    public void insert(User user){
+    public void insert(User user) throws DataAccessException {
+        String sql = "INSERT INTO users (userName, password, email, firstName, lastName, gender, personID) " +
+                "VALUES(?,?,?,?,?,?,?)";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getGender());
+            stmt.setString(7, user.getPersonID());
 
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            throw new DataAccessException("Error encountered while inserting into the database");
+        }
     }
 
     /**
@@ -25,16 +44,43 @@ public class UserDAO {
      * @param username
      * @return user
      */
-    public User get(String username){
-
-        User user = null;
-        return user;
+    public User retrieve(String username) throws DataAccessException {
+        User user;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM events WHERE userName = ?;";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                user = new User(rs.getString("userName"), rs.getString("password"),
+                        rs.getString("email"), rs.getString("firstName"), rs.getString("lastName"),
+                        rs.getString("gender"), rs.getString("personID"));
+                return user;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while finding event");
+        } finally {
+          if(rs != null){
+              try{
+                  rs.close();
+              } catch (SQLException e){
+                  e.printStackTrace();
+              }
+          }
+        }
+        return null;
     }
 
     /**
      * Deletes all the usernames from the table
      */
-    public void clear(){
-
+    public void clear() throws DataAccessException{
+        try (Statement stmt = conn.createStatement()){
+            String sql = "DELETE FROM users";
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new DataAccessException("SQL Error encountered while clearing tables");
+        }
     }
 }
