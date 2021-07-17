@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Objects;
+
 /**
  * An Event in a person's life.
  */
@@ -137,4 +139,13 @@ public class Event {
     public void setYear(int year) {
         this.year = year;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Float.compare(event.latitude, latitude) == 0 && Float.compare(event.longitude, longitude) == 0 && year == event.year && Objects.equals(associatedUsername, event.associatedUsername) && Objects.equals(eventID, event.eventID) && Objects.equals(personID, event.personID) && Objects.equals(country, event.country) && Objects.equals(city, event.city) && Objects.equals(eventType, event.eventType);
+    }
+
 }

@@ -14,10 +14,10 @@ public class UserDAO {
      * @param user
      */
     public void insert(User user) throws DataAccessException {
-        String sql = "INSERT INTO users (userName, password, email, firstName, lastName, gender, personID) " +
+        String sql = "INSERT INTO users (username, password, email, firstName, lastName, gender, personID) " +
                 "VALUES(?,?,?,?,?,?,?)";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getPassword());
+            stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getFirstName());
@@ -47,12 +47,12 @@ public class UserDAO {
     public User retrieve(String username) throws DataAccessException {
         User user;
         ResultSet rs = null;
-        String sql = "SELECT * FROM events WHERE userName = ?;";
+        String sql = "SELECT * FROM users WHERE username = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, username);
             rs = stmt.executeQuery();
             if(rs.next()){
-                user = new User(rs.getString("userName"), rs.getString("password"),
+                user = new User(rs.getString("username"), rs.getString("password"),
                         rs.getString("email"), rs.getString("firstName"), rs.getString("lastName"),
                         rs.getString("gender"), rs.getString("personID"));
                 return user;

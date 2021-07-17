@@ -48,7 +48,7 @@ public class PersonDAO {
      * @param personID
      * @return person
      */
-    public Person retrieve(String personID) throws DataAccessException, SQLException{
+    public Person retrieve(String personID) throws DataAccessException{
         Person person;
         ResultSet rs = null;
         String sql = "SELECT * FROM persons WHERE personID = ?;";
