@@ -32,15 +32,15 @@ public class AuthTokenDAO extends Database{
 
     /**
      * Gets an Authorization Token from the data with a given userID
-     * @param username
+     * @param token
      * @return user
      */
-    public AuthToken retrieve(String username) throws DataAccessException {
+    public AuthToken retrieve(String token) throws DataAccessException {
         AuthToken authToken;
         ResultSet rs = null;
-        String sql = "SELECT * FROM authToken WHERE username = ?;";
+        String sql = "SELECT * FROM authToken WHERE token = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setString(1, username);
+            stmt.setString(1, token);
             rs = stmt.executeQuery();
             if(rs.next()){
                 authToken = new AuthToken(rs.getString("username"), rs.getString("token"));

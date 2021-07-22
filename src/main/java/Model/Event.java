@@ -7,13 +7,13 @@ import java.util.Objects;
  */
 public class Event {
     /**
-     * Username of the user's account this event belongs to.
-     */
-    private String associatedUsername;
-    /**
      * event's unique ID.
      */
     private String eventID;
+    /**
+     * Username of the user's account this event belongs to.
+     */
+    private String associatedUsername;
     /**
      * ID of the person this event belongs to.
      */

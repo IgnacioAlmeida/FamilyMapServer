@@ -41,11 +41,6 @@ public class EventResponse extends Response{
      */
     private int year;
     /**
-     * boolean identifier.
-     */
-    private boolean success;
-
-    /**
      * Event's constructor.
      */
     public EventResponse(){
@@ -56,10 +51,10 @@ public class EventResponse extends Response{
         super();
     }
 
-    public EventResponse(String associatedUsername, String eventID, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {
+    public EventResponse(String eventID, String associatedUsername, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {
         super();
-        this.associatedUsername = associatedUsername;
         this.eventID = eventID;
+        this.associatedUsername = associatedUsername;
         this.personID = personID;
         this.latitude = latitude;
         this.longitude = longitude;

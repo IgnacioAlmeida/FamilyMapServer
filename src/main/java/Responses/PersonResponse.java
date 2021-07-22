@@ -39,10 +39,6 @@ public class PersonResponse extends Response{
      */
     private String spouseID;
     /**
-     * Boolean identifier.
-     */
-    private boolean success;
-    /**
      * All family members of the current user.
      */
     private Person[] people;

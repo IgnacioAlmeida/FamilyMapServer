@@ -53,7 +53,7 @@ public class RegisterService {
 
             db.closeConnection(true);
 
-            //TODO generate ancestors data with fillservice
+            //Generates ancestors data
             FillService fillService = new FillService();
             FillRequest fillRequest = new FillRequest(registerRequest.getUserName(),4);
             fillService.fill(fillRequest);

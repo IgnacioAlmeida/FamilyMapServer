@@ -14,10 +14,9 @@ public class EventsListResponse extends Response{
 
     public EventsListResponse(String message){super();}
 
+
     public Event[] getEvents() {
         return data;
-
-
     }
 
     public void setEvents(Event[] data) {

@@ -1,9 +1,11 @@
 package Handler;
 
-import Requests.EventRequest;
+import DataAccess.DataAccessException;
 import Responses.EventResponse;
+import Responses.EventsListResponse;
 import Serializer.JsonSerializer;
 import Services.EventService;
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -17,34 +19,43 @@ public class EventHandler extends RequestHandler implements HttpHandler {
         try{
             if(exchange.getRequestMethod().toUpperCase().equals("GET")){
                 String uri = exchange.getRequestURI().toString();
+                Headers auth = exchange.getRequestHeaders();
                 String[] args = uri.split("/");
-                EventRequest request = null;
                 EventService event = new EventService();
                 EventResponse response = null;
+                EventsListResponse listResponse = null;
+                String strResponse = "";
+                String authToken = "";
 
-                //TODO get authtokens?
-                if(args.length < 2){
-                request = new EventRequest();
-                response = event.event(request);
+                if(auth.containsKey("Authorization")){
+                    authToken = auth.getFirst("Authorization");
+                }
+
+                if(args.length > 1){
+                    response = event.event(authToken, args[2]);
+
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
+                    OutputStream respBody = exchange.getResponseBody();
+                    strResponse = JsonSerializer.serialize(response);
+                    writeString(strResponse,respBody);
+                    respBody.close();
                 }
                 else{
-                request = new EventRequest(args[2]);
-                response = event.allEvent(request);
+                    listResponse = event.allEvents(authToken);
+
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
+                    OutputStream respBody = exchange.getResponseBody();
+                    strResponse = JsonSerializer.serialize(listResponse);
+                    writeString(strResponse,respBody);
+                    respBody.close();
                 }
-
-                String strResponse = "";
-
-                OutputStream respBody = exchange.getResponseBody();
-                strResponse = JsonSerializer.serialize(response);
-                writeString(strResponse,respBody);
-                respBody.close();
 
             }
             else{
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
                 exchange.getResponseBody().close();
             }
-        } catch (IOException e){
+        } catch (IOException | DataAccessException e){
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
             exchange.getResponseBody().close();
             e.printStackTrace();
