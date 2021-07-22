@@ -2,9 +2,11 @@ package DataAccess;
 
 import Model.AuthToken;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
+import java.util.UUID;
 
-public class AuthTokenDAO {
+public class AuthTokenDAO extends Database{
     private final Connection conn;
 
     public AuthTokenDAO(Connection conn){this.conn = conn;}
@@ -25,6 +27,8 @@ public class AuthTokenDAO {
             throw new DataAccessException("Error encountered while inserting into the database");
         }
     }
+
+
 
     /**
      * Gets an Authorization Token from the data with a given userID

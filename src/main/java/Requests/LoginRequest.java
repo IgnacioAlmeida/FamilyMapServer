@@ -7,7 +7,7 @@ public class LoginRequest {
     /**
      * The user's Username.
      */
-    private String userName;
+    private String username;
     /**
      * The Username's password.
      */
@@ -20,11 +20,11 @@ public class LoginRequest {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {

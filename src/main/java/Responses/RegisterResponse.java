@@ -7,7 +7,7 @@ public class RegisterResponse extends Response{
     /**
      * Non-empty auth token string.
      */
-    private String authToken;
+    private String authtoken;
     /**
      * Username passed in with request.
      */
@@ -17,22 +17,29 @@ public class RegisterResponse extends Response{
      */
     private String personID;
     /**
-     * Boolean identifier.
-     */
-    private boolean success;
-    /**
      * RegisterResponse Constructor.
      */
-    RegisterResponse(){
+    public RegisterResponse(){
         super();
     }
 
-    public String getAuthToken() {
-        return authToken;
+    public RegisterResponse(String message){
+        super(message);
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public RegisterResponse(String authtoken, String username, String personID){
+        super();
+        this.authtoken = authtoken;
+        this.username = username;
+        this.personID = personID;
+    }
+
+    public String getAuthToken() {
+        return authtoken;
+    }
+
+    public void setAuthToken(String authtoken) {
+        this.authtoken = authtoken;
     }
 
     public String getUsername() {

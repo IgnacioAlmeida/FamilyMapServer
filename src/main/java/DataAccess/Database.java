@@ -1,9 +1,7 @@
 package DataAccess;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.UUID;
 
 public class Database {
     private Connection conn;
@@ -67,10 +65,40 @@ public class Database {
     {
 
         try (Statement stmt = conn.createStatement()){
-            String sql = "DELETE FROM Events";
+            String sql = "DELETE FROM events";
+            stmt.executeUpdate(sql);
+            sql = "DELETE FROM authToken";
+            stmt.executeUpdate(sql);
+            sql = "DELETE FROM persons";
+            stmt.executeUpdate(sql);
+            sql = "DELETE FROM users";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new DataAccessException("SQL Error encountered while clearing tables");
         }
+    }
+
+//    /**
+//     * Deletes date from specified table from a username's data
+//     * @param username
+//     */
+    public void clear(String table, String username) throws DataAccessException {
+        String sql = "DELETE FROM ? WHERE associatedUsername = ? VALUES(?,?)";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, table);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new DataAccessException("Error encoutered while deleting persons related to the username");
+        }
+    }
+
+    /**
+     * Generates a random Authorization Token
+     * @return
+     */
+    public String randomGenerator() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid;
     }
 }

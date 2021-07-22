@@ -1,5 +1,8 @@
 package Responses;
 
+import DataAccess.DataAccessException;
+import DataAccess.Database;
+
 /**
  * A Parent class for the Responses.
  */
@@ -12,21 +15,16 @@ public class Response {
      * Boolean identifier
      */
     protected boolean success;
-
-    /**
-     * Constructor for when we have an error.
-     * @param message
-     */
-    Response(String message){
-        this.message = message;
-        success = false;
-    }
-
     /**
      * Constructor for when everything works fine.
      */
-    Response(){
+    public Response(){
         success = true;
+    }
+
+    public Response(String message){
+        this.success = false;
+        this.message = message;
     }
 
     public String getMessage() {

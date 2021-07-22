@@ -9,7 +9,7 @@ public class User {
     /**
      * Unique user's userName.
      */
-    private String userName;
+    private String username;
     /**
      * User's password.
      */
@@ -38,7 +38,7 @@ public class User {
     /**
      * Creates a user.
      *
-     * @param userName
+     * @param username
      * @param password
      * @param email
      * @param firstName
@@ -46,8 +46,8 @@ public class User {
      * @param gender
      * @param personID
      */
-    public User(String userName, String password, String email, String firstName, String lastName, String gender, String personID) {
-        this.userName = userName;
+    public User(String username, String password, String email, String firstName, String lastName, String gender, String personID) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -57,11 +57,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -117,6 +117,6 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(gender, user.gender) && Objects.equals(personID, user.personID);
+        return Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(gender, user.gender) && Objects.equals(personID, user.personID);
     }
 }

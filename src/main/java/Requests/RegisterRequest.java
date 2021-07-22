@@ -7,7 +7,7 @@ public class RegisterRequest {
     /**
      * The user's Username.
      */
-    private String userName;
+    private String username;
     /**
      * The Username's password.
      */
@@ -36,11 +36,11 @@ public class RegisterRequest {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {

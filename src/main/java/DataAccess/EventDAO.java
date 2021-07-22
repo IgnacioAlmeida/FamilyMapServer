@@ -5,7 +5,7 @@ import Model.Event;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class EventDAO {
+public class EventDAO extends Database{
     private final Connection conn;
 
     public EventDAO(Connection conn)
@@ -18,8 +18,8 @@ public class EventDAO {
      */
     public void insert(Event event) throws DataAccessException{
 
-        String sql = "INSERT INTO Events (EventID, AssociatedUsername, PersonID, Latitude, Longitude, " +
-                "Country, City, EventType, Year) VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO events (eventID, associatedUsername, personID, latitude, longitude, " +
+                "country, city, eventType, year) VALUES(?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, event.getEventID());
             stmt.setString(2, event.getAssociatedUsername());
@@ -37,11 +37,11 @@ public class EventDAO {
     }
 
     /**
-     * Deletes a given Event from the data
-     * @param personID
+     * Deletes a given Event from the data //TODO it may by deleted by user and not eventID
+     * @param eventID
      */
-    public void delete(String personID){
-
+    public void delete(String eventID){
+        String sql =  "DELETE FROM events WHERE personID = eventID+";
     }
 
     /**
@@ -111,4 +111,32 @@ public class EventDAO {
             throw new DataAccessException("SQL Error encountered while clearing tables");
         }
     }
+    /**
+     * Deletes all persons from a username's data
+     * @param username
+     */
+    public void clear(String username) throws DataAccessException {
+        String sql = "DELETE FROM events WHERE associatedUsername = ?;";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new DataAccessException("Error encountered while deleting persons related to the username");
+        }
+    }
+
+//    public int getBirthYear(String personID) throws DataAccessException {
+//        String sql = "SELECT year FROM events WHERE personID = ? and eventType = 'Birth';";
+//        int year = 0;
+//        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+//            stmt.setString(1,personID);
+//            ResultSet rs = stmt.executeQuery();
+//            while(rs.next()){
+//                year = rs.getInt(year);
+//            }
+//            return year;
+//        } catch (SQLException e){
+//            throw new DataAccessException("Error encountered while selecting event");
+//        }
+//    }
 }

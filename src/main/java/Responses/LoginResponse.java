@@ -17,16 +17,23 @@ public class LoginResponse extends Response{
      */
     private String personID;
     /**
-     * Boolean identifier.
-     */
-    private boolean success;
-
-    /**
      * LoginResponse constructor.
      */
-    LoginResponse(){
+    public LoginResponse(){
         super();
     }
+
+    public LoginResponse(String message){
+        super();
+    }
+
+    public LoginResponse(String authtoken, String username, String personID){
+        super();
+        this.authtoken = authtoken;
+        this.username = username;
+        this.personID = personID;
+    }
+
 
     public String getAuthtoken() {
         return authtoken;
@@ -52,11 +59,4 @@ public class LoginResponse extends Response{
         this.personID = personID;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 }

@@ -26,7 +26,7 @@ public class UserDAO {
             stmt.setString(7, user.getPersonID());
 
             stmt.executeUpdate();
-        } catch(SQLException e){
+        } catch (SQLException e){
             throw new DataAccessException("Error encountered while inserting into the database");
         }
     }
@@ -38,6 +38,7 @@ public class UserDAO {
     public void delete(String username){
 
     }
+
 
     /**
      * Gets a user from the data
@@ -57,9 +58,9 @@ public class UserDAO {
                         rs.getString("gender"), rs.getString("personID"));
                 return user;
             }
-        }catch(SQLException e){
+        } catch (SQLException e){
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while finding event");
+            throw new DataAccessException("Error encountered while retrieving user");
         } finally {
           if(rs != null){
               try{
