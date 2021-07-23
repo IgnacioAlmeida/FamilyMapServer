@@ -1,5 +1,6 @@
 package Handler;
 
+import DataAccess.DataAccessException;
 import Responses.Response;
 import Serializer.JsonSerializer;
 import com.sun.net.httpserver.HttpExchange;

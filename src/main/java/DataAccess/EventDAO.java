@@ -37,34 +37,6 @@ public class EventDAO extends Database{
     }
 
     /**
-     * Deletes a given Event from the data //TODO it may by deleted by user and not eventID
-     * @param eventID
-     */
-    public void delete(String eventID){
-        String sql =  "DELETE FROM events WHERE personID = eventID+";
-    }
-
-    /**
-     * Gets the events in a person's life
-     * @param personID
-     * @return events
-     */
-    public Event getFromPerson(String personID){
-        ArrayList<Event> events = new ArrayList<>();
-        return null;
-    }
-
-    /**
-     * Gets the events in the user's life
-     * @param userID
-     * @return events
-     */
-    public Event[] getFromUser(String userID){
-        ArrayList<Event> events = new ArrayList<>();
-        return null;
-    }
-
-    /**
      * Gets an Event from the Data
      * @param eventID
      * @return event
@@ -160,18 +132,4 @@ public class EventDAO extends Database{
         }
     }
 
-//    public int getBirthYear(String personID) throws DataAccessException {
-//        String sql = "SELECT year FROM events WHERE personID = ? and eventType = 'Birth';";
-//        int year = 0;
-//        try(PreparedStatement stmt = conn.prepareStatement(sql)){
-//            stmt.setString(1,personID);
-//            ResultSet rs = stmt.executeQuery();
-//            while(rs.next()){
-//                year = rs.getInt(year);
-//            }
-//            return year;
-//        } catch (SQLException e){
-//            throw new DataAccessException("Error encountered while selecting event");
-//        }
-//    }
 }

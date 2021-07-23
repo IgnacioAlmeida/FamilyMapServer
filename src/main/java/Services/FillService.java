@@ -133,7 +133,7 @@ public class FillService {
         childDAO.retrieve(child.getPersonID());
         childDAO.updateParentsID(fatherID, motherID, child.getPersonID());
 
-        int[] currentBirthYears = createEvents(conn, child, father, mother, birthYear);
+        int[] currentBirthYears = createEvents(conn, father, mother, birthYear);
 
         if(generation < requestedGenerations){
 
@@ -144,7 +144,7 @@ public class FillService {
 
     }
 
-    private int[] createEvents(Connection conn, Person child, Person father, Person mother, int birthYear) throws DataAccessException {
+    private int[] createEvents(Connection conn, Person father, Person mother, int birthYear) throws DataAccessException {
         EventDAO eDAO = new EventDAO(conn);
 
         Location momBirthLocation = locations.locationAt(random.nextInt(LOCATIONS_COUNT));
@@ -183,9 +183,11 @@ public class FillService {
         Event dadDeath = new Event(eDAO.randomGenerator(), currentPerson.getAssociatedUsername(), father.getPersonID(),
                 dadDeathLocation.getLatitude(), dadDeathLocation.getLongitude(), dadDeathLocation.getCountry(),
                 dadDeathLocation.getCity(), "Death", birthYear + 60);
+
         eDAO.insert(motherDeath);
         eDAO.insert(dadDeath);
         eventsCounter += 6;
+
         return birthYears;
     }
 

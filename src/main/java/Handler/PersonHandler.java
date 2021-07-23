@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
-public class PersonHandler extends RequestHandler implements HttpHandler {
+public class PersonHandler extends PostRequestHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try{
@@ -37,36 +37,14 @@ public class PersonHandler extends RequestHandler implements HttpHandler {
                 if(args.length > 2){
                     response = service.person(authToken, args[2]);
 
-                    if(response.isSuccess()) {
-                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    }
-                    else{
-                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                    }
-                    OutputStream respBody = exchange.getResponseBody();
-                    strResponse = JsonSerializer.serialize(response);
-                    writeString(strResponse,respBody);
-                    respBody.close();
+                    postRequests(response, exchange);
                 }
                 else{
                     listResponse = service.allPersons(authToken);
 
-                    if(listResponse.isSuccess()) {
-                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    }
-                    else{
-                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                    }
-                    OutputStream respBody = exchange.getResponseBody();
-                    strResponse = JsonSerializer.serialize(listResponse);
-                    writeString(strResponse,respBody);
-                    respBody.close();
+                    postRequests(listResponse,exchange);
                 }
 
-            }
-            else{
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-                exchange.getResponseBody().close();
             }
         } catch (IOException | DataAccessException e){
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);

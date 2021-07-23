@@ -36,28 +36,6 @@ public class PersonDAO extends Database{
     }
 
     /**
-     * Deletes a given Person from the data
-     * @param personID
-     */
-    public void delete(String personID){
-
-    }
-
-//    /**
-//     * Deletes all persons from a username's data
-//     * @param username
-//     */
-//    public void clear(String username) throws DataAccessException {
-//        String sql = "DELETE FROM persons WHERE username = ?;";
-//        try(PreparedStatement stmt = conn.prepareStatement(sql)){
-//            stmt.setString(1, username);
-//            stmt.executeUpdate();
-//        } catch (SQLException e){
-//            throw new DataAccessException("Error encoutered while deleting persons related to the username");
-//        }
-//    }
-
-    /**
      * Gets a Person from the data
      * @param personID
      * @return person
@@ -117,16 +95,6 @@ public class PersonDAO extends Database{
                 }
             }
         }
-    }
-
-    /**
-     * Gets all the person related to the user
-     * @param user
-     * @return persons
-     */
-    public Person[] getAll(String user){
-        ArrayList<Person> persons = new ArrayList<>();
-        return null;
     }
 
     /**

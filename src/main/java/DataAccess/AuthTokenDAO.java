@@ -81,7 +81,6 @@ public class AuthTokenDAO extends Database{
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM authToken WHERE token = ?;");
             stmt.setString(1,authToken);
             stmt.executeUpdate();
-            //stmt.close();//TODO not sure about this one
         } catch (SQLException e){
             throw new DataAccessException("SQL Error encountered deleting an authorization token");
         }

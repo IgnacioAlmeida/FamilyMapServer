@@ -31,13 +31,6 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Deletes a given user from the data
-     * @param username
-     */
-    public void delete(String username){
-
-    }
 
 
     /**

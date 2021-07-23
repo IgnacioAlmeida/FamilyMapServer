@@ -20,7 +20,7 @@ public class AuthTokenDAOTest {
     @BeforeEach
     public void setUp() throws DataAccessException{
         db = new Database();
-        bestToken = new AuthToken("ignacioh","123");
+        bestToken = new AuthToken("ignacio","123");
         Connection conn = db.getConnection();
         db.clearTables();
         tDao = new AuthTokenDAO(conn);
@@ -34,7 +34,7 @@ public class AuthTokenDAOTest {
     @Test
     public void insertPass() throws DataAccessException{
         tDao.insert(bestToken);
-        AuthToken compareTest = tDao.retrieve(bestToken.getUserName());
+        AuthToken compareTest = tDao.retrieve(bestToken.getToken());
         assertNotNull(compareTest);
         assertEquals(bestToken,compareTest);
     }
@@ -48,7 +48,7 @@ public class AuthTokenDAOTest {
     @Test
     public void retrievePass() throws DataAccessException{
         tDao.insert(bestToken);
-        AuthToken compareTest = tDao.retrieve(bestToken.getUserName());
+        AuthToken compareTest = tDao.retrieve(bestToken.getToken());
         assertNotNull(compareTest);
         assertEquals(bestToken,compareTest);
     }
@@ -64,18 +64,6 @@ public class AuthTokenDAOTest {
         assertDoesNotThrow(()->tDao.clear());
     }
 
-    @Test
-    public void deletePass() throws DataAccessException{
-        tDao.insert(bestToken);
-        assertNotNull(tDao);
-        tDao.delete("123");
-        assertNull(tDao);
-    }
-
-    @Test
-    public void deleteFail() throws DataAccessException{
-
-    }
 
 
 }

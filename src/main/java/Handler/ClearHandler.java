@@ -21,9 +21,6 @@ public class ClearHandler extends PostRequestHandler implements HttpHandler {
                 postRequests(response, exchange);
 
             }
-            else{
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-            }
         } catch (IOException | DataAccessException e) {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
             exchange.getResponseBody().close();

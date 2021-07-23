@@ -35,7 +35,6 @@ public class RegisterService {
             AuthTokenDAO aDAO = new AuthTokenDAO(db.getConnection());
             UserDAO uDAO = new UserDAO(db.getConnection());
             PersonDAO pDAO = new PersonDAO(db.getConnection());
-            EventDAO eDAO = new EventDAO(db.getConnection());
             String personID = pDAO.randomGenerator();
 
             if(uDAO.retrieve(registerRequest.getUserName()) != null){

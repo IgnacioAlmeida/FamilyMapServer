@@ -43,13 +43,4 @@ public class LoadRequest {
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
-
-    @Override
-    public String toString() {
-        return "LoadRequest{" +
-                "users=" + users +
-                ", persons=" + persons +
-                ", events=" + events +
-                '}';
-    }
 }
