@@ -9,7 +9,7 @@ public class AuthToken {
     /**
      * userName that is using the token.
      */
-    private String userName;
+    private String username;
 
     /**
      * The Token being created for security reasons.
@@ -19,20 +19,20 @@ public class AuthToken {
     /**
      * Creates an authorization token.
      *
-     * @param userName
+     * @param username
      * @param token
      */
-    public AuthToken(String userName, String token) {
-        this.userName = userName;
+    public AuthToken(String username, String token) {
+        this.username = username;
         this.token = token;
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getToken() {
@@ -48,6 +48,6 @@ public class AuthToken {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthToken authToken = (AuthToken) o;
-        return Objects.equals(userName, authToken.userName) && Objects.equals(token, authToken.token);
+        return Objects.equals(username, authToken.username) && Objects.equals(token, authToken.token);
     }
 }

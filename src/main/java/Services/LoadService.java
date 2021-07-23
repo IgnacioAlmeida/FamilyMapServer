@@ -58,7 +58,7 @@ public class LoadService {
             response.setMessage(message);
 
         } catch (DataAccessException e){
-            String failResponse = "Couldn\'t load data";
+            String failResponse = "Error: Couldn\'t load data";
             response = new Response(failResponse);
             db.closeConnection(true);
         }

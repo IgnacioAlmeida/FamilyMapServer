@@ -19,7 +19,7 @@ public class EventDAO extends Database{
     public void insert(Event event) throws DataAccessException{
 
         String sql = "INSERT INTO events (eventID, associatedUsername, personID, latitude, longitude, " +
-                "country, city, eventType, year) VALUES(?,?,?,?,?,?,?,?,?)";
+                "country, city, eventType, year) VALUES(?,?,?,?,?,?,?,?,?);";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, event.getEventID());
             stmt.setString(2, event.getAssociatedUsername());
@@ -99,6 +99,12 @@ public class EventDAO extends Database{
         return null;
     }
 
+    /**
+     * Retrieves all events related to a user
+     * @param username
+     * @return
+     * @throws DataAccessException
+     */
     public ArrayList<Event> retrieveUserEvents(String username) throws DataAccessException {
         ArrayList<Event> events = new ArrayList<>();
         Event event;

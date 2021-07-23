@@ -39,7 +39,7 @@ public class RegisterService {
             String personID = pDAO.randomGenerator();
 
             if(uDAO.retrieve(registerRequest.getUserName()) != null){
-                response = new RegisterResponse("User already exists, please choose a new one.");
+                response = new RegisterResponse("Error: User already exists, please choose a new one.");
                 db.closeConnection(true);
             }
 
@@ -62,9 +62,9 @@ public class RegisterService {
 
 
         } catch (DataAccessException | IOException e) {
-            response = new RegisterResponse("Couldn't load the data");
+            response = new RegisterResponse("Error: Couldn't load the data");
             e.printStackTrace();
-            db.closeConnection(true);
+            db.closeConnection(false);
         }
         return response;
     }

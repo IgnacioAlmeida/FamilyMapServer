@@ -31,30 +31,37 @@ public class EventHandler extends RequestHandler implements HttpHandler {
                     authToken = auth.getFirst("Authorization");
                 }
 
-                if(args.length > 1){
+                if(args.length > 2){
                     response = event.event(authToken, args[2]);
 
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
-                    OutputStream respBody = exchange.getResponseBody();
-                    strResponse = JsonSerializer.serialize(response);
-                    writeString(strResponse,respBody);
-                    respBody.close();
+                    if(response.isSuccess()) {
+                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    }
+                    else{
+                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                    }
+                        OutputStream respBody = exchange.getResponseBody();
+                        strResponse = JsonSerializer.serialize(response);
+                        writeString(strResponse, respBody);
+                        respBody.close();
                 }
                 else{
                     listResponse = event.allEvents(authToken);
 
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK,0);
-                    OutputStream respBody = exchange.getResponseBody();
-                    strResponse = JsonSerializer.serialize(listResponse);
-                    writeString(strResponse,respBody);
-                    respBody.close();
+                    if(listResponse.isSuccess()) {
+                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    }
+                    else{
+                        exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                    }
+                        OutputStream respBody = exchange.getResponseBody();
+                        strResponse = JsonSerializer.serialize(listResponse);
+                        writeString(strResponse, respBody);
+                        respBody.close();
                 }
 
             }
-            else{
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-                exchange.getResponseBody().close();
-            }
+
         } catch (IOException | DataAccessException e){
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);
             exchange.getResponseBody().close();

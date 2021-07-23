@@ -45,8 +45,23 @@ public class PersonResponse extends Response{
     /**
      * PersonResponse constructor.
      */
-    PersonResponse(){
+    public PersonResponse(){
         super();
+    }
+
+    public PersonResponse(String message){
+        super(message);
+    }
+
+    public PersonResponse(String personID, String associatedUsername, String firstName, String lastName, String gender, String fatherID, String motherID, String spouseID) {
+        this.personID = personID;
+        this.associatedUsername = associatedUsername;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.fatherID = fatherID;
+        this.motherID = motherID;
+        this.spouseID = spouseID;
     }
 
     public String getAssociatedUsername() {

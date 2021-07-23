@@ -24,7 +24,7 @@ public class LoginResponse extends Response{
     }
 
     public LoginResponse(String message){
-        super();
+        super(message);
     }
 
     public LoginResponse(String authtoken, String username, String personID){

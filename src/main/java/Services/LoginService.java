@@ -46,17 +46,17 @@ public class LoginService {
 
                 }
                 else{
-                    response = new LoginResponse("Invalid values. Please check your Username and Password");
+                    response = new LoginResponse("Error: Invalid values. Please check your Username and Password");
                     db.closeConnection(true);
                 }
             }
             else{
-                response = new LoginResponse("Username doesn't exist");
+                response = new LoginResponse("Error: Username doesn't exist");
                 db.closeConnection(true);
             }
         } catch (DataAccessException e){
-            response = new LoginResponse("Couldn't load the data");
-            db.closeConnection(true);
+            response = new LoginResponse("Error: Couldn't load the data");
+            db.closeConnection(false);
         }
 
         return response;

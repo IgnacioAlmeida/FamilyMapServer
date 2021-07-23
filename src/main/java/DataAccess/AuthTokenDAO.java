@@ -16,12 +16,11 @@ public class AuthTokenDAO extends Database{
      * @param authToken
      */
     public void insert(AuthToken authToken) throws DataAccessException {
-        String sql = "INSERT INTO authToken (username, token) VALUES(?,?)";
+        String sql = "INSERT INTO authToken (username, token) VALUES(?,?);";
 
         try(PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, authToken.getUserName());
             stmt.setString(2, authToken.getToken());
-
             stmt.executeUpdate();
         } catch(SQLException e){
             throw new DataAccessException("Error encountered while inserting into the database");
@@ -66,7 +65,7 @@ public class AuthTokenDAO extends Database{
      */
     public void clear() throws DataAccessException {
         try (Statement stmt = conn.createStatement()){
-            String sql = "DELETE FROM authToken";
+            String sql = "DELETE FROM authToken;";
             stmt.executeUpdate(sql);
         } catch (SQLException e){
             throw new DataAccessException("SQL Error encountered while clearing tables");
@@ -74,43 +73,12 @@ public class AuthTokenDAO extends Database{
     }
 
     /**
-     * Gets back the given Authorization Token
-     * @param authToken
-     * @return newAuthToken
-     */
-//    public AuthToken retrieveAuthToken(String authToken) throws DataAccessException {
-//        AuthToken token;
-//        ResultSet rs  = null;
-//        String sql = "SELECT * FROM authToken WHERE token = ?;";
-//        try(PreparedStatement stmt = conn.prepareStatement(sql)){
-//            stmt.setString(1, authToken);
-//            rs = stmt.executeQuery();
-//            if(rs.next()){
-//                token = new token(rs.getString("username"), rs.getString("token"));
-//                return token;
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//            throw new DataAccessException("Error encountered while finding event");
-//        } finally {
-//            if(rs != null) {
-//                try {
-//                    rs.close();
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        }
-//        return null;
-//    }
-
-    /**
      * Deletes an Authorization Token from the data
      * @param authToken
      */
     public void delete(String authToken) throws DataAccessException {
         try{
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM authToken WHERE token = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM authToken WHERE token = ?;");
             stmt.setString(1,authToken);
             stmt.executeUpdate();
             //stmt.close();//TODO not sure about this one

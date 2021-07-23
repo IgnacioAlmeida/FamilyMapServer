@@ -41,17 +41,17 @@ public class EventService {
                     }
                     else{
                         db.closeConnection(true);
-                        response = new EventResponse("Requested event does not belong to this user.");
+                        response = new EventResponse("Error: Requested event does not belong to this user.");
                     }
                 }
                 else{
                     db.closeConnection(true);
-                    response = new EventResponse("Invalid Event ID.");
+                    response = new EventResponse("Error: Invalid Event ID.");
                 }
             }
             else{
                 db.closeConnection(true);
-                response = new EventResponse("Invalid Authorization Token.");
+                response = new EventResponse("Error: Invalid Authorization Token.");
             }
 
         } catch (DataAccessException e) {
@@ -78,22 +78,25 @@ public class EventService {
 
             if(aDAO.retrieve(authToken) != null){
                 events = eDAO.retrieveUserEvents(aDAO.retrieve(authToken).getUserName());
-                Event[] eventsArray = new Event[events.size()];
-                eventsArray = events.toArray(eventsArray);
-                response = new EventsListResponse(eventsArray);
+                if(events != null) {
+                    Event[] eventsArray = new Event[events.size()];
+                    eventsArray = events.toArray(eventsArray);
+                    response = new EventsListResponse(eventsArray);
+                }
+                else{
+                    response = new EventsListResponse("Error: Token does not correspond to this user");
+                }
             }
             else{
-                response = new EventsListResponse("Invalid Authorization Token.");
-                db.closeConnection(true);
+                response = new EventsListResponse("Error: Invalid Authorization Token.");
             }
 
         } catch (DataAccessException e) {
+            response = new EventsListResponse("Error in accessing data");
             e.printStackTrace();
             db.closeConnection(false);
         }
-
         db.closeConnection(true);
-
         return response;
     }
 

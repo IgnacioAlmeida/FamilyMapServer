@@ -26,7 +26,7 @@ public class ClearService {
             response = new Response();
             response.setMessage("Clear succeeded.");
         } catch (DataAccessException e){
-            String failResponse = "Data couldn't be cleared";
+            String failResponse = "Error: Data couldn't be cleared";
             response = new Response(failResponse);
             db.closeConnection(true);
         }

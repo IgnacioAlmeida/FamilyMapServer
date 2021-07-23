@@ -25,8 +25,8 @@ public class FillService {
     final private int MALE_NAMES_COUNT = 144;
     final private int LAST_NAMES_COUNT = 152;
     private Random random = new Random();
-    private int peopleCounter = 1;
-    private int eventsCounter = 1;
+    private int peopleCounter = 0;
+    private int eventsCounter = 0;
     Person currentPerson;
     int requestedGenerations;
 
@@ -96,11 +96,11 @@ public class FillService {
 
             }
             else{
-                response = new Response("The number of generations must be a non-negative integer.");
+                response = new Response("Error: The number of generations must be a non-negative integer.");
                 db.closeConnection(true);
             }
         } catch(DataAccessException e){
-            response = new Response("Couldn't load the data");
+            response = new Response("Error: Couldn't load the data");
             db.closeConnection(true);
         }
         return response;
@@ -164,10 +164,10 @@ public class FillService {
         Location marriageLocaiton = locations.locationAt(random.nextInt(LOCATIONS_COUNT));
         Event motherMarriage = new Event(eDAO.randomGenerator(), currentPerson.getAssociatedUsername(), mother.getPersonID(),
                 marriageLocaiton.getLatitude(), marriageLocaiton.getLongitude(), marriageLocaiton.getCountry(), marriageLocaiton.getCity(),
-                "Marriage", birthYear + 21);
+                "Marriage", birthYear + 22);
         Event dadMarriage = new Event(eDAO.randomGenerator(), currentPerson.getAssociatedUsername(), father.getPersonID(),
                 marriageLocaiton.getLatitude(), marriageLocaiton.getLongitude(), marriageLocaiton.getCountry(), marriageLocaiton.getCity(),
-                "Marriage", birthYear + 23);
+                "Marriage", birthYear + 22);
         eDAO.insert(motherMarriage);
         eDAO.insert(dadMarriage);
 

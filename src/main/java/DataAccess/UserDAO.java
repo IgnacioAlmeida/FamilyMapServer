@@ -15,7 +15,7 @@ public class UserDAO {
      */
     public void insert(User user) throws DataAccessException {
         String sql = "INSERT INTO users (username, password, email, firstName, lastName, gender, personID) " +
-                "VALUES(?,?,?,?,?,?,?)";
+                "VALUES(?,?,?,?,?,?,?);";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getUserName());
             stmt.setString(2, user.getPassword());
@@ -78,7 +78,7 @@ public class UserDAO {
      */
     public void clear() throws DataAccessException{
         try (Statement stmt = conn.createStatement()){
-            String sql = "DELETE FROM users";
+            String sql = "DELETE FROM users;";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new DataAccessException("SQL Error encountered while clearing tables");

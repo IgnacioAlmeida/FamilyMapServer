@@ -48,7 +48,7 @@ public class EventResponse extends Response{
     }
 
     public EventResponse(String message){
-        super();
+        super(message);
     }
 
     public EventResponse(String eventID, String associatedUsername, String personID, float latitude, float longitude, String country, String city, String eventType, int year) {

@@ -12,7 +12,7 @@ public class EventsListResponse extends Response{
 
     public EventsListResponse(){super();}
 
-    public EventsListResponse(String message){super();}
+    public EventsListResponse(String message){super(message);}
 
 
     public Event[] getEvents() {
