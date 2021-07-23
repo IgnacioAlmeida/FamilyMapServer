@@ -37,6 +37,7 @@ public class LoginService {
             if(systemUser != null){
                 if(requestedPassword.equals(systemUser.getPassword())){
                     authToken = new AuthToken(requestedUsername, aDAO.randomGenerator());
+                    aDAO.deleteUserAuth(requestedUsername);
                     aDAO.insert(authToken);
                     String personID = uDAO.retrieve(requestedUsername).getPersonID();
 

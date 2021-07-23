@@ -81,7 +81,10 @@ public class FillService {
                                             birthLocation.getLongitude(), birthLocation.getCountry(), birthLocation.getCity(),
                                     "Birth", 1995);
                 pDAO.insert(currentPerson);
+                peopleCounter += 1;
+
                 eDAO.insert(userBirth);
+                eventsCounter += 1;
 
                 //Creates user's ancestors profiles and events
                 createAncestors(db.getConnection(), currentPerson,1,1995);
@@ -123,6 +126,8 @@ public class FillService {
 
         pDAO.insert(father);
         pDAO.insert(mother);
+        peopleCounter += 2;
+
 
         PersonDAO childDAO = new PersonDAO(conn);
         childDAO.retrieve(child.getPersonID());
@@ -131,10 +136,9 @@ public class FillService {
         int[] currentBirthYears = createEvents(conn, child, father, mother, birthYear);
 
         if(generation < requestedGenerations){
+
             createAncestors(conn, father, generation + 1, currentBirthYears[1]);
             createAncestors(conn, mother, generation + 1, currentBirthYears[0]);
-            peopleCounter += 2;
-            eventsCounter += 6;
         }
 
 
@@ -181,7 +185,7 @@ public class FillService {
                 dadDeathLocation.getCity(), "Death", birthYear + 60);
         eDAO.insert(motherDeath);
         eDAO.insert(dadDeath);
-
+        eventsCounter += 6;
         return birthYears;
     }
 

@@ -31,6 +31,8 @@ public class EventHandler extends RequestHandler implements HttpHandler {
                     authToken = auth.getFirst("Authorization");
                 }
 
+                int argsLength = args.length;
+
                 if(args.length > 2){
                     response = event.event(authToken, args[2]);
 

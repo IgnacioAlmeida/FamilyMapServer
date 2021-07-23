@@ -41,6 +41,7 @@ public class RegisterService {
             if(uDAO.retrieve(registerRequest.getUserName()) != null){
                 response = new RegisterResponse("Error: User already exists, please choose a new one.");
                 db.closeConnection(true);
+                return response;
             }
 
             authtoken = new AuthToken(requestedUsername,aDAO.randomGenerator());
